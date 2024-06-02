@@ -1,17 +1,16 @@
 document.getElementById('cadastroForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    const nome = document.getElementById('nome').value;
-    const email = document.getElementById('email').value;
-    const telefone = document.getElementById('telefone').value;
-    const cep = document.getElementById('cep').value;
-    const uf = document.getElementById('uf').value;
-    
-    console.log('Nome:', nome);
-    console.log('E-mail:', email);
-    console.log('Telefone:', telefone);
-    console.log('CEP:', cep);
-    console.log('UF:', uf);
+    const ufInput = document.getElementById('uf');
+    const ufError = document.getElementById('ufError');
 
-    alert('Cadastro realizado com sucesso!');
+    // Regex para validar UF (Estados brasileiros)
+    const ufRegex = /^(AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO)$/i;
+
+    const ufValue = ufInput.value.toUpperCase();
+
+    if (!ufRegex.test(ufValue)) {
+        ufError.style.display = 'inline';
+        event.preventDefault();
+    } else {
+        ufError.style.display = 'none';
+    }
 });
